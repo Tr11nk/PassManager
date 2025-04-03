@@ -1,0 +1,37 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:PassManager.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="PassManager.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+
+	<StackPanel Spacing="25">
+		<Border Margin="5" Background="Aquamarine" CornerRadius="10" BorderThickness="7" MaxWidth="600" >
+			<TextBlock Text="{Binding Header}" HorizontalAlignment="Center" Margin="5" FontSize="24" ></TextBlock>
+		</Border>
+		<Grid ColumnDefinitions="120, 100"
+		  RowDefinitions="Auto, Auto, Auto" Margin="5 0"  >
+			<Button   Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Name="Button_Add" MinWidth="100" HorizontalContentAlignment="Center" Margin="0,0,0,10" Click="Button_cl" >Add</Button>
+			<Button Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Name="Button_Edit" MinWidth="100" HorizontalContentAlignment="Center" Margin="0,0,0,10" Click="Button_cl">Edit</Button>
+			<Button Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Name="Button_Del" MinWidth="100" HorizontalContentAlignment="Center" Click="Button_cl">Delete</Button>
+			<Button Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Name="Button_List" MinWidth="100" HorizontalContentAlignment="Center" Click="Button_cl" Margin="0,0,0,10">List</Button>
+		</Grid>
+		<DataGrid Grid.Column="1" Margin="20" ItemsSource="{Binding People}"
+		  AutoGenerateColumns="False"  IsReadOnly="True"
+		  GridLinesVisibility="All"  Height="200"
+		  BorderThickness="1" BorderBrush="Gray"  >
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Site" Binding="{Binding Site}" Width="*"/>
+				<DataGridTextColumn Header="Login" Binding="{Binding Login}" Width="*" />
+				<DataGridTextColumn Header="Password" Binding="{Binding Password}" MinWidth="250" />
+			</DataGrid.Columns>
+		</DataGrid>
+	</StackPanel>
+</UserControl>
