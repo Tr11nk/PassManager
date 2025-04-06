@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Microsoft.Data.Sqlite;
 using PassManager.ViewModels;
 using System.Diagnostics;
 
@@ -21,9 +22,21 @@ public partial class MainView : UserControl
             case "Button_Add":
                 {
                     Debug.WriteLine("Add");
-                    var viewModel = (MainViewModel)DataContext;
-                    var newPerson = new MainViewModel.Person("mail.ru", "gow", "adwa");
-                    viewModel.People.Add(newPerson);
+                    var viewModel = DataContext as MainViewModel;
+                    var newLine = new MainViewModel.Data("mail.ru", "gow", "adwa");
+                    using (var connection = new SqliteConnection()) 
+                    {
+                        connection.Open();
+                        SqliteCommand command = connection.CreateCommand();
+                        command.CommandText= 
+                            @"
+                                INSERT INTO People (Site, Login, Password)
+                                VALUES ($firstName, $lastName, $age);
+                            ";
+
+                    }
+                        viewModel.Datac.Add(newLine);
+                        
                 }
                 break;
             case "Button_Edit":
@@ -34,6 +47,12 @@ public partial class MainView : UserControl
             case "Button_Del":
                 {
                     Debug.WriteLine("Del");
+                    var viewModel = DataContext as MainViewModel;
+                    if (viewModel.SelectedData != null)
+                    {
+                        viewModel.Datac.Remove(viewModel.SelectedData);
+                    }
+                    break;
                 }
                 break;
             case "Button_List":
