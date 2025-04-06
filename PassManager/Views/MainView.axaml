@@ -17,14 +17,14 @@
 			<TextBlock Text="{Binding Header}" HorizontalAlignment="Center" Margin="5" FontSize="24" ></TextBlock>
 		</Border>
 		<Grid ColumnDefinitions="120, 100"
-		  RowDefinitions="Auto, Auto, Auto" Margin="5 0"  >
+		  RowDefinitions="Auto, Auto, Auto" Margin="5 0" >
 			<Button   Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Name="Button_Add" MinWidth="100" HorizontalContentAlignment="Center" Margin="0,0,0,10" Click="Button_cl" >Add</Button>
 			<Button Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Name="Button_Edit" MinWidth="100" HorizontalContentAlignment="Center" Margin="0,0,0,10" Click="Button_cl">Edit</Button>
 			<Button Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Name="Button_Del" MinWidth="100" HorizontalContentAlignment="Center" Click="Button_cl">Delete</Button>
 			<Button Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Name="Button_List" MinWidth="100" HorizontalContentAlignment="Center" Click="Button_cl" Margin="0,0,0,10">List</Button>
 		</Grid>
-		<DataGrid Grid.Column="1" Margin="20" ItemsSource="{Binding People}"
-		  AutoGenerateColumns="False"  IsReadOnly="True"
+		<DataGrid Grid.Column="1" Margin="20" ItemsSource="{Binding Datac}"
+		  AutoGenerateColumns="False"  IsReadOnly="True" SelectedItem="{Binding SelectedData, Mode=TwoWay}"
 		  GridLinesVisibility="All"  Height="200"
 		  BorderThickness="1" BorderBrush="Gray"  >
 			<DataGrid.Columns>
